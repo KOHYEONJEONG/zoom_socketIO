@@ -10,13 +10,5 @@ html(lang="en")
         header 
             h1 Noom 
         main 
-            form#nickName
-                input(type="text", placeholder="choose a nickname", reqired)
-                button Save
-
-            ul
-            form#message
-                input(type="text", placeholder="write a msg", reqired)
-                button Send
-
+        script(src="/socket.io/socket.io.js") - 프론트에도 socket.io를 import해야지 프론트와 백 둘다 호환 가능하다.
         script(src="/public/js/app.js") - 여기까지만 작성하면 실행안됨. static작업 필요

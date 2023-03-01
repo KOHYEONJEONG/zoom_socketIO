@@ -1,7 +1,7 @@
 //프론트엔드(app.js) + 백엔드(server.js)
 
 import http from "http";
-import SocketIO from "socket.io"; //npm
+import { Server } from "socket.io"; //npm i  socket.io
 import express from "express"; 
 const app = express();
 //express 할일 : views를 설정해주고 render 해주는걸로 끝이다.
@@ -13,13 +13,16 @@ app.use("/public",express.static(__dirname+"/public"));
 //우리가 사용할 유일한 route 
 app.get("/",(_, res) => res.render("home"));
 app.get("/*",(_, res) => res.redirect("/"));//오!! 다른 url은 전혀 사용하지 않을 것이며 홈만 사용할거라 추가!
-const handleListen = () => console.log(`Listening on http://localhost:3000/`);
-//app.listen(3000,handleListen);
+
 
 //순서1) 서버 만들기
-const server = http.createServer(app);
+const httpServer = http.createServer(app);
+const wsServer = new Server(httpServer);
 
-const io = SocketIO(server);//fucntion에 server를 보내줬당.
+
+const handleListen = () => console.log(`Listening on http://localhost:3000/`);
+httpServer.listen(3000,handleListen);
+
 
 // //1️⃣터미널   :  npm run dev 실행하기
 // //2️⃣브라우저 :  http://localhost:3000/ 으로 실행
